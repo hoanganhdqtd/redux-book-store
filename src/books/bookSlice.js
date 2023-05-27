@@ -31,14 +31,19 @@ const initialState = {
 // );
 
 const fetchBooks = async ({ pageNum, limit, query }) => {
-  try {
-    let url = `/books?_page=${pageNum}&_limit=${limit}`;
-    if (query) url += `&q=${query}`;
-    const res = await api.get(url);
-    return res.data;
-  } catch (error) {
-    return error;
-  }
+  // try {
+  //   let url = `/books?_page=${pageNum}&_limit=${limit}`;
+  //   if (query) url += `&q=${query}`;
+  //   const res = await api.get(url);
+  //   return res.data;
+  // } catch (error) {
+  //   throw error;
+  // }
+
+  let url = `/books?_page=${pageNum}&_limit=${limit}`;
+  if (query) url += `&q=${query}`;
+  const res = await api.get(url);
+  return res.data;
 };
 
 export const fetchData = createAsyncThunk("books/fetchData", async (props) => {
@@ -91,20 +96,20 @@ export const bookSlice = createSlice({
   },
   extraReducers: (builder) => {
     // builder
-    //   .addCase(fetchBooks.pending, (state, action) => {
-    //     // Add user to the state array
-    //     state.status = "loading";
-    //   })
-    //   .addCase(fetchBooks.fulfilled, (state, action) => {
-    //     state.status = "";
-    //     state.books = action.payload;
-    //   })
-    //   .addCase(fetchBooks.rejected, (state, action) => {
-    //     // state.loading = false;
-    //     state.status = "rejected";
+    // .addCase(fetchBooks.pending, (state, action) => {
+    //   // Add user to the state array
+    //   state.status = "loading";
+    // })
+    // .addCase(fetchBooks.fulfilled, (state, action) => {
+    //   state.status = "";
+    //   state.books = action.payload;
+    // })
+    // .addCase(fetchBooks.rejected, (state, action) => {
+    //   // state.loading = false;
+    //   state.status = "rejected";
 
-    //     console.log(action.error.message);
-    //   });
+    //   console.log(action.error.message);
+    // });
 
     builder
       .addCase(fetchData.pending, (state) => {
@@ -116,6 +121,7 @@ export const bookSlice = createSlice({
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.status = "rejected";
+        // console.log("action", action);
       });
 
     builder

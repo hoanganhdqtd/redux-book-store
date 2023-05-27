@@ -17,7 +17,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { fetchData } from "../books/bookSlice";
-// import { fetchBooks } from "../books/bookSlice";
+import { fetchBooks } from "../books/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
@@ -58,6 +58,8 @@ const HomePage = () => {
     setQuery(data.searchQuery);
   };
   //----------------
+
+  console.log("books", books);
 
   return (
     <Container>
